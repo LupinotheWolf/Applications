@@ -1,0 +1,12 @@
+{% extends "budgets/layout.html" %}
+
+{% block body %}
+<h2>Budgets</h2>
+<h3>This is a list of your transactions:</h3>
+{% for budget in budgets %}
+<li>{{ budget }}</li>
+{% endfor %}
+
+
+
+{% endblock %}

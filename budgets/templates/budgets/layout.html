@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Budgets</title>
+</head>
+<body>
+  <div>
+    <h1 href="{% url 'index' %}">Budgets</h1>
+    <ul class="sidebar-nav">
+      {% if user.is_authenticated %}
+      <li>Logged in as {{ user.get_username }}</li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li>Not Logged In!</li>
+      <li><a href="{% url 'login' %}">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  {% block body %}
+  {% endblock %}
+</body>
+</html>
