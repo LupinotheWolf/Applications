@@ -1,10 +1,13 @@
 {% extends 'budgets/layout.html' %}
 {% block body %}
-<h2>These are all the transactions in the database</h2>
-<ul>
-{% for transaction in transactions %}
-<li><a href="{% url 'transaction' transaction.id %}">Transaction {{ transaction.id }}: {{ transaction.name }}</a></li>
-{% endfor %}
-</ul>
+Make Sure you Create an overview page!
+
+<div>
+  <ul>
+    <li>Overview Budgets</li>
+    <li>This Month's Budgets</li>
+    <li>Budgets Archives</li>
+  </ul>
+<div>
 
 {% endblock %}
