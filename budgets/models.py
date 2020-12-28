@@ -1,7 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
 from django.urls import reverse
-# Create your models here.
 
 class Transaction(models.Model):
     name = models.CharField(max_length=64)

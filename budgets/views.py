@@ -10,7 +10,7 @@ from django.views.generic.list import ListView
 from .models import *
 from .forms import *
 
-# Create your views here.
+#Homepage/Index View
 def index(request):
     if not request.user.is_authenticated:
         return render(request, "budgets/login.html",)
@@ -20,6 +20,7 @@ def index(request):
             'templates': Template.objects.all(),
         })
 
+#User Logins/Logouts
 def login_view(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -42,21 +43,13 @@ def logout_view(request):
         'logout_msg': 'Click Here to Login Again',
     })
 
+#Budget Overview Page
 def overview(request):
     return render(request, "budgets/overview.html", {
         'transactions': Transaction.objects.all(),
     })
 
-def transaction(request, trans_id):
-    trans_request = Transaction.objects.get(id=trans_id)
-    return render(request, "budgets/transaction.html", {
-        'transaction': trans_request,
-    })
-
-def transaction_detailview(request):
-    return render(request, "transaction-detailview.html")
-
-
+#Class-Based Views
 class TransactionListView(ListView):
     model = Transaction
 class TransactionDetailView(DetailView):
