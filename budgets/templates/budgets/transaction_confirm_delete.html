@@ -1,0 +1,14 @@
+{% extends 'budgets/layout.html' %}
+{% block body %}
+<h1>Delete Transaction?</h1>
+<p>Are you sure you want to delete the transaction {{ transaction }}?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="submit" value="Yes, Delete">
+</form>
+
+
+
+
+{% endblock %}

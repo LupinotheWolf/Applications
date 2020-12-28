@@ -1,0 +1,16 @@
+{% extends 'budgets/layout.html' %}
+
+{% block body %}
+<h1>Transaction List</h1>
+  {% if transaction_list %}
+  <ul>
+    {% for transaction in transaction_list %}
+      <li>
+        <a href="{{ transaction.get_absolute_url }}">{{ transaction.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There aren't any transactions to display</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'budgets/layout.html' %}
+{% block body %}
+<h1>Transaction Detail</h1>
+<ul>
+  <li>Transaction Name: {{ transaction.name }}</li>
+  <li>Transaction Amount: {{ transaction.amount }}
+  <li>Transaction Reference Number: {{ transaction.id }}</li>
+  <li>Transaction Date: {{ transaction.date }}</li>
+  {% if transaction.notes %}
+  <li>Notes: {{ transaction.notes }}</li>
+  {% endif %}
+  <li><a href="{% url 'transaction-update' transaction.id %}">Update Transaction</a></li>
+  <li><a href="{% url 'transaction-delete' transaction.id %}">Delete Transaction</a></li>
+</ul>
+{% endblock %}

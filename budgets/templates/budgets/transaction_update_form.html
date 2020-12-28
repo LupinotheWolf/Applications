@@ -1,0 +1,13 @@
+{% extends 'budgets/layout.html' %}
+{% block body %}
+<form href="{% url 'transaction-detail' transaction.id }" method="post">
+  {% csrf_token %}
+<table>
+  {{ form.as_table }}
+</table>
+<input type="submit" value="Update">
+</form>
+
+
+
+{% endblock %}
