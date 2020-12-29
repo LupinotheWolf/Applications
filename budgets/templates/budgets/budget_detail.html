@@ -1,0 +1,17 @@
+{% extends 'budgets/layout.html' %}
+{% block body %}
+<h1>Budget Detail</h1>
+<ul>
+  <li>Name: {{ budget.name }}</li>
+  <li>Primary Key: {{ budget.pk }}</li>
+  {% if budget.sections %}
+    {% for section in budget.sections.all %}
+    <li>{{ section }}</li>
+    {% endfor %}
+  {% else %}
+    <li>No Sections in this Budget</li>
+  {% endif %}
+  <li><a href="#">Update Budget</a></li>
+  <li><a href="#">Delete Budget</a></li>
+</ul>
+{% endblock %}
