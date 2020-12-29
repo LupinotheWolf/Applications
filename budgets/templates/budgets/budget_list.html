@@ -9,7 +9,7 @@
   </tr>
   {% for budget in budget_list %}
   <tr>
-    <th scope='row'><a href="{{ budget.get_absolute_url }}">{{ budget.name }}</a></td>
+    <td scope='row'><a href="{{ budget.get_absolute_url }}">{{ budget.name }}</a></td>
   </tr>
   {% endfor %}
 </table>
