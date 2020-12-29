@@ -23,6 +23,8 @@ class Section(models.Model):
 class Budget(models.Model):
     name = models.CharField(max_length=64)
     sections = models.ManyToManyField(Section)
+    def get_absolute_url(self):
+        return reverse('budget-detail', args=[str(self.pk)])
     def __str__(self):
         return self.name
 

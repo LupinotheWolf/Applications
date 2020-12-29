@@ -65,3 +65,19 @@ class Transaction_Update(UpdateView):
 class Transaction_Delete(DeleteView):
     model = Transaction
     success_url = reverse_lazy('transactions')
+
+class BudgetListView(ListView):
+    model = Budget
+    queryset = Budget.objects.all()
+class Budget_Create(CreateView):
+    model = Budget
+    fields = ['name', 'sections']
+class BudgetDetailView(DetailView):
+    model = Budget
+    fields = ['name', 'sections']
+class Budget_Update(UpdateView):
+    model = Budget
+    fields = ['name', 'sections']
+class Budget_Delete(DeleteView):
+    model = Budget
+    success_url = reverse_lazy('budgets')
