@@ -52,10 +52,11 @@ def overview(request):
 #Class-Based Views
 class TransactionListView(ListView):
     model = Transaction
-class TransactionDetailView(DetailView):
+    queryset = Transaction.objects.all()
+class Transaction_Create(CreateView):
     model = Transaction
     fields = ['name', 'amount', 'date', 'notes']
-class Transaction_Create(CreateView):
+class TransactionDetailView(DetailView):
     model = Transaction
     fields = ['name', 'amount', 'date', 'notes']
 class Transaction_Update(UpdateView):

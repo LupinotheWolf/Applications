@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from budgets.models import Transaction
+from budgets.models import *
 
 class TransactionForm(ModelForm):
     class Meta:

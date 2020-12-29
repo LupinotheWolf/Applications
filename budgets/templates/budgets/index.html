@@ -1,13 +1,12 @@
 {% extends "budgets/layout.html" %}
 
 {% block body %}
-<h2>Budgets</h2>
-<h3>This is a list of your transactions:</h3>
-{% for budget in budgets %}
-<li>{{ budget }}</li>
-{% endfor %}
-
-
-
-
+<h2>Welcome to Budgets!</h2>
+<p>Please use the sidebar to navigate the site!</p>
+<h3>Options</h3>
+<ul>
+  <li><a href="#">View Template</a></li>
+  <li><a href="#">Current Month</a></li>
+  <li><a href="#">View Archives</a></li>
+</ul>
 {% endblock %}

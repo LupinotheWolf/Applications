@@ -10,7 +10,7 @@ class Transaction(models.Model):
     class Metadata:
         ordering = ['date']
     def get_absolute_url(self):
-        return reverse('transaction-detail', args=[str(self.id)])
+        return reverse('transaction-detail', args=[str(self.pk)])
     def __str__(self):
         return self.name
 
