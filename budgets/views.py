@@ -6,6 +6,8 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
 from .forms import *
@@ -20,64 +22,43 @@ def index(request):
             'templates': Template.objects.all(),
         })
 
-#User Logins/Logouts
-def login_view(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect(reverse('index'))
-        else:
-            return render(request, 'budgets/login.html', {
-                'message': 'Invalid Credentials!'
-            })
-    else:
-        return render(request, 'budgets/login.html')
-
-def logout_view(request):
-    logout(request)
-    return render(request, 'budgets/login.html', {
-        'message': 'You have Logged Out successfuly!',
-        'logout_msg': 'Click Here to Login Again',
-    })
-
 #Budget Overview Page
+@login_required
 def overview(request):
     return render(request, "budgets/overview.html", {
         'transactions': Transaction.objects.all(),
     })
 
 #Class-Based Views
-class TransactionListView(ListView):
+class TransactionListView(LoginRequiredMixin, ListView):
     model = Transaction
-    queryset = Transaction.objects.all()
-class Transaction_Create(CreateView):
-    model = Transaction
-    fields = ['name', 'amount', 'date', 'notes']
-class TransactionDetailView(DetailView):
+    def get_queryset(self):
+        return Transaction.objects.filter(account=self.request.user)
+class Transaction_Create(LoginRequiredMixin, CreateView):
     model = Transaction
     fields = ['name', 'amount', 'date', 'notes']
-class Transaction_Update(UpdateView):
+class TransactionDetailView(LoginRequiredMixin, DetailView):
     model = Transaction
     fields = ['name', 'amount', 'date', 'notes']
-class Transaction_Delete(DeleteView):
+class Transaction_Update(LoginRequiredMixin, UpdateView):
+    model = Transaction
+    fields = ['name', 'amount', 'date', 'notes']
+class Transaction_Delete(LoginRequiredMixin, DeleteView):
     model = Transaction
     success_url = reverse_lazy('transactions')
 
-class BudgetListView(ListView):
+class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
     queryset = Budget.objects.all()
-class Budget_Create(CreateView):
+class Budget_Create(LoginRequiredMixin, CreateView):
     model = Budget
     fields = ['name', 'sections']
-class BudgetDetailView(DetailView):
+class BudgetDetailView(LoginRequiredMixin, DetailView):
     model = Budget
     fields = ['name', 'sections']
-class Budget_Update(UpdateView):
+class Budget_Update(LoginRequiredMixin, UpdateView):
     model = Budget
     fields = ['name', 'sections']
-class Budget_Delete(DeleteView):
+class Budget_Delete(LoginRequiredMixin, DeleteView):
     model = Budget
     success_url = reverse_lazy('budgets')

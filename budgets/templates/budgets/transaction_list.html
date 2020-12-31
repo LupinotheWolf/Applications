@@ -12,7 +12,7 @@
   </tr>
   {% for transaction in transaction_list %}
   <tr>
-    <th scope='row'><a href="{{ transaction.get_absolute_url }}">{{ transaction.name }}</a></td>
+    <th scope='row'><a href="{{ transaction.get_absolute_url }}">{{ transaction.name }}</a></th>
     <td>{{ transaction.amount }}</td>
     <td>{{ transaction.date }}</td>
     <td>{{ transaction.notes }}</td>

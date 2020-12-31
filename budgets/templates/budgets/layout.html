@@ -10,7 +10,6 @@
 <body>
   <div>
     <h1 href="{% url 'index' %}">Budgets</h1>
-
   </div>
 
   <div class="container-fluid">
@@ -18,15 +17,15 @@
         <div class="col-sm-2">
         {% block sidebar %}
         <ul class="sidebar-nav">
+          {% if user.is_authenticated %}
           <li><a href="{% url 'budgets' %}">Budgets</a></li>
           <li><a href="{% url 'transactions' %}">Transactions</a></li>
           <li><a href="{% url 'transaction-create' %}">Add Transaction</a></li>
-          {% if user.is_authenticated %}
           <li>Logged in as {{ user.get_username }}</li>
-          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
           {% else %}
-          <li>Not Logged In!</li>
-          <li><a href="{% url 'login' %}">Login</a></li>
+          <li>Please Login to View Content!</li>
+          <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
           {% endif %}
         </ul>
        {% endblock %}
