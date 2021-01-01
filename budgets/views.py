@@ -37,6 +37,9 @@ class TransactionListView(LoginRequiredMixin, ListView):
 class Transaction_Create(LoginRequiredMixin, CreateView):
     model = Transaction
     fields = ['name', 'amount', 'date', 'notes']
+    def form_valid(self, form):
+        form.instance.account = self.request.user
+        return super().form_valid(form)
 class TransactionDetailView(LoginRequiredMixin, DetailView):
     model = Transaction
     fields = ['name', 'amount', 'date', 'notes']
