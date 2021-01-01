@@ -8,6 +8,15 @@ Make Sure you Create an overview page!
     <li>This Month's Budgets</li>
     <li>Budgets Archives</li>
   </ul>
+</div>
 <div>
+  <ul>
+    {% for template in templates %}
+    <li>{{ template }}</li>
+    {% empty %}
+    <li>No Templates to list!</li>
+    {% endfor %}
+  </ul>
+</div>
 
 {% endblock %}

@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("overview/", views.overview, name="overview"),
+    path("overview/", views.overview, name="overview")
 ]
 
 #Transactions URLs

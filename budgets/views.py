@@ -25,8 +25,11 @@ def index(request):
 #Budget Overview Page
 @login_required
 def overview(request):
+    templates = Template.objects.filter(account=request.user)
+    budgets = Budget.objects.filter(account=request.user)
     return render(request, "budgets/overview.html", {
-        'transactions': Transaction.objects.all(),
+        'templates': templates,
+        'budgets': budgets,
     })
 
 #Class-Based Views
@@ -50,9 +53,18 @@ class Transaction_Delete(LoginRequiredMixin, DeleteView):
     model = Transaction
     success_url = reverse_lazy('transactions')
 
+#class SectionListView(LoginRequiredMixin, ListView):
+
+
+
+
+
+
+
+
 class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
-    queryset = Budget.objects.all()
+    #queryset = Budget.objects.filter(account=self.request.user)
 class Budget_Create(LoginRequiredMixin, CreateView):
     model = Budget
     fields = ['name', 'sections']

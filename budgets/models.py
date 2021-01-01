@@ -25,14 +25,14 @@ class Section(models.Model):
 class Budget(models.Model):
     name = models.CharField(max_length=64)
     sections = models.ManyToManyField(Section)
-    def get_absolute_url(self):
-        return reverse('budget-detail', args=[str(self.pk)])
+    account = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
 class Template(models.Model):
     name = models.CharField(max_length=64)
     budgets = models.ManyToManyField(Budget)
-    all_transactions = models.ManyToManyField(Transaction)
+    all_transactions = models.ManyToManyField(Transaction, blank=True)
+    account = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
