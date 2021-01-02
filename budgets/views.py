@@ -39,23 +39,19 @@ class TransactionListView(LoginRequiredMixin, ListView):
         return Transaction.objects.filter(account=self.request.user)
 class Transaction_Create(LoginRequiredMixin, CreateView):
     model = Transaction
-    fields = ['name', 'amount', 'date', 'notes']
+    fields = ['name', 'amount', 'date', 'category', 'notes']
     def form_valid(self, form):
         form.instance.account = self.request.user
         return super().form_valid(form)
 class TransactionDetailView(LoginRequiredMixin, DetailView):
     model = Transaction
-    fields = ['name', 'amount', 'date', 'notes']
+    fields = ['name', 'amount', 'date', 'category', 'notes']
 class Transaction_Update(LoginRequiredMixin, UpdateView):
     model = Transaction
     fields = ['name', 'amount', 'date', 'notes']
 class Transaction_Delete(LoginRequiredMixin, DeleteView):
     model = Transaction
     success_url = reverse_lazy('transactions')
-
-#class SectionListView(LoginRequiredMixin, ListView):
-
-
 
 
 

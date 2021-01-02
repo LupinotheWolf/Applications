@@ -8,6 +8,7 @@
     <th scope='col'>Transaction</th>
     <th scope='col'>Amount</th>
     <th scope='col'>Date</th>
+    <th scope='col'>Category</th>
     <th scope='col'>Notes</th>
   </tr>
   {% for transaction in transaction_list %}
@@ -15,6 +16,7 @@
     <th scope='row'><a href="{{ transaction.get_absolute_url }}">{{ transaction.name }}</a></th>
     <td>{{ transaction.amount }}</td>
     <td>{{ transaction.date }}</td>
+    <td>{{ transaction.category }}</td>
     <td>{{ transaction.notes }}</td>
   </tr>
   {% endfor %}
