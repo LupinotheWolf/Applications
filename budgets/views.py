@@ -60,7 +60,6 @@ class Transaction_Delete(LoginRequiredMixin, DeleteView):
 
 class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
-    #queryset = Budget.objects.filter(account=self.request.user)
 class Budget_Create(LoginRequiredMixin, CreateView):
     model = Budget
     fields = ['name', 'sections']
