@@ -3,23 +3,28 @@ from django.forms import ModelForm
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-category_list = [
-    ('income', ('Income')),
-    ('food', ('Food')),
-    ('bills/utilities', ('Bills/Utilities')),
-    ('travel', ('Travel')),
-    ('amusement', ('Amusement')),
-    ('misc', ('Miscellaneous')),
-]
-
 
 class Transaction(models.Model):
+    I = "Income"
+    F = "Food"
+    B = "Bills/Utilities"
+    T = "Travel"
+    A = "Amusement"
+    M = "Miscellaneous"
+    CHOICES = (
+        (I, "Income"),
+        (F, "Food"),
+        (B, "Bills/Utilities"),
+        (T, "Travel"),
+        (A, "Amusement"),
+        (M, "Miscellaneous"),
+    )
     name = models.CharField(max_length=64)
     amount = models.DecimalField(max_digits=65, decimal_places=2,)
     date = models.DateField()
     notes = models.TextField(blank=True)
     account = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.CharField('Transaction Type', max_length=32, choices=category_list, default='misc')
+    category = models.CharField('Category', max_length=32, choices=CHOICES, default=I)
     class Metadata:
         ordering = ['date']
     def get_absolute_url(self):
