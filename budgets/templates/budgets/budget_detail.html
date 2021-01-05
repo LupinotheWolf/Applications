@@ -3,13 +3,13 @@
 <h1>Budget Detail</h1>
 <ul>
   <li>Name: {{ budget.name }}</li>
-  <li>Primary Key: {{ budget.pk }}</li>
+  <li>Predicted Amount: {{ budget.amount_predicted }}£</li>
   {% if budget.sections %}
-    {% for section in budget.sections.all %}
-    <li>{{ section }}</li>
+    {% for transaction in budget.transactions.all %}
+    <li>{{ transaction }}</li>
     {% endfor %}
   {% else %}
-    <li>No Sections in this Budget</li>
+    <li>No transactions in this Budget</li>
   {% endif %}
   <li><a href="#">Update Budget</a></li>
   <li><a href="#">Delete Budget</a></li>

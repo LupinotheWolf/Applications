@@ -60,12 +60,17 @@ class Transaction_Delete(LoginRequiredMixin, DeleteView):
 
 class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
+    def get_queryset(self):
+        return Budget.objects.filter(account=self.request.user)
 class Budget_Create(LoginRequiredMixin, CreateView):
     model = Budget
-    fields = ['name', 'sections']
+    fields = ['name', 'month', 'year', 'transactions', 'amount_predicted']
+    def form_valid(self, form):
+        form.instance.account = self.request.user
+        return super().form_valid(form)
 class BudgetDetailView(LoginRequiredMixin, DetailView):
     model = Budget
-    fields = ['name', 'sections']
+    fields = ['name', 'transactions', 'amount_predicted']
 class Budget_Update(LoginRequiredMixin, UpdateView):
     model = Budget
     fields = ['name', 'sections']
