@@ -32,6 +32,22 @@ def overview(request):
         'budgets': budgets,
     })
 
+@login_required
+def template(request):
+    template = Template.objects.get(pk=1)
+    return render(request, "budgets/template-view.html", {
+        'template': template,
+    })
+
+@login_required
+def template_edit(request):
+    template = Template.objects.get(pk=1)
+    return render(request, "budgets/template-edit.html", {
+        'template': template,
+    })
+
+
+
 #Class-Based Views
 class TransactionListView(LoginRequiredMixin, ListView):
     model = Transaction

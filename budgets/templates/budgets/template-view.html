@@ -1,0 +1,14 @@
+{% extends 'budgets/layout.html' %}
+{% block body %}
+<h1>Template Information</h1>
+<ul>
+  <li>Income Prediction: {{ template.pre_income }}£</li>
+  <li>Food Prediction: {{ template.pre_food }}£</li>
+  <li>Bills Prediction: {{ template.pre_bills }}£</li>
+  <li>Travel Prediction: {{ template.pre_travel }}£</li>
+  <li>Amusement Prediction: {{ template.pre_amusement }}£</li>
+</ul>
+<div>
+<a href="{% url 'template-edit' %}">Edit Template</a>
+</div>
+{% endblock %}

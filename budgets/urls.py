@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     #path("", views.index, name="index"),
-    path("overview/", views.overview, name="overview")
+    path("overview/", views.overview, name="overview"),
 ]
 
 #Transactions URLs
@@ -23,4 +23,10 @@ urlpatterns += [
     path('budgets/<int:pk>/', views.BudgetDetailView.as_view(), name='budget-detail'),
     path('budgets/<int:pk/update/', views.Budget_Update.as_view(), name='budget-update'),
     path('budgets/<int:pk>/delete/', views.Budget_Delete.as_view(), name='budget-delete'),
+]
+
+#Template URLs
+urlpatterns += [
+    path("template/view", views.template, name="template"),
+    path("template/edit", views.template_edit, name="template-edit"),
 ]
