@@ -71,7 +71,6 @@ class Budget(models.Model):
         (DEC, "December"),
     )
     transactions = models.ManyToManyField(Transaction, blank=True)
-    name = models.CharField(max_length=64)
     month = models.CharField('Month', max_length=12, choices=MONTHS, default=now.strftime('%B'), blank=False)
     year = models.IntegerField(validators=[validate_year])
     amount_predicted = models.DecimalField(max_digits=65, decimal_places=2)

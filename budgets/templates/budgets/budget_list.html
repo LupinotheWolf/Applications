@@ -5,11 +5,11 @@
 {% if budget_list %}
 <table class='table'>
   <tr>
-    <th scope='col'>Name</th>
+    <th scope='col'>Budget</th>
   </tr>
   {% for budget in budget_list %}
   <tr>
-    <td scope='row'><a href="{{ budget.get_absolute_url }}">{{ budget.name }}</a></td>
+    <td scope='row'><a href="{{ budget.get_absolute_url }}">{{ budget.month }} {{ budget.year }}</a></td>
   </tr>
   {% endfor %}
 </table>

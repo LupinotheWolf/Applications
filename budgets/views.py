@@ -54,17 +54,13 @@ class Transaction_Delete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('transactions')
 
 
-
-
-
-
 class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
     def get_queryset(self):
         return Budget.objects.filter(account=self.request.user)
 class Budget_Create(LoginRequiredMixin, CreateView):
     model = Budget
-    fields = ['name', 'month', 'year', 'transactions', 'amount_predicted']
+    fields = ['month', 'year', 'transactions', 'amount_predicted']
     def form_valid(self, form):
         form.instance.account = self.request.user
         return super().form_valid(form)

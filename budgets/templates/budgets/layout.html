@@ -9,7 +9,7 @@
 </head>
 <body>
   <div>
-    <h1 href="{% url 'index' %}">Budgets</h1>
+    <h1>Budgets</h1>
   </div>
 <div class="row">
 <div class="col">
@@ -20,9 +20,11 @@
   <li class="nav-item">
     <a href="{% url 'budgets' %}" class="btn btn-light">Budgets</a></li>
   <li class="nav-item">
+    <a href="{% url 'budget-create' %}" class="btn btn-light">Create Budget</a></li>
+  <li class="nav-item">
     <a href="{% url 'transactions' %}" class="btn btn-light">Transactions</a></li>
   <li class="nav-item">
-    <a href="{% url 'transaction-create' %}" class="btn btn-light">Add Transaction</a></li>
+    <a href="{% url 'transaction-create' %}" class="btn btn-light">New Transaction</a></li>
   <li class="nav-item">
     <a href="{% url 'logout' %}?next={{request.path}}" class="btn btn-light">Logout</a></li>
   {% else %}
