@@ -12,7 +12,6 @@ def validate_year(value):
     if value < 2000 or value > now.year+1:
         raise ValidationError(f'Please Enter a Year Between 2000 and {now.year+1}!')
 
-
 class Transaction(models.Model):
     I = "Income"
     F = "Food"
@@ -41,6 +40,18 @@ class Transaction(models.Model):
     def __str__(self):
         return self.name
 
+class Template(models.Model):
+    pre_income = models.DecimalField(max_digits=65, decimal_places=2,)
+    pre_food = models.DecimalField(max_digits=65, decimal_places=2,)
+    pre_bills = models.DecimalField(max_digits=65, decimal_places=2,)
+    pre_travel = models.DecimalField(max_digits=65, decimal_places=2,)
+    pre_amusement = models.DecimalField(max_digits=65, decimal_places=2,)
+    def __str__(self):
+        return 'Template'
+
+
+
+
 class Budget(models.Model):
     JAN = "January"
     FEB = "February"
@@ -56,7 +67,6 @@ class Budget(models.Model):
     DEC = "December"
 
     MONTHS = (
-        #(None, 'Please Select a Month'),
         (JAN, "January"),
         (FEB, "Febuary"),
         (MAR, "March"),
@@ -73,17 +83,9 @@ class Budget(models.Model):
     transactions = models.ManyToManyField(Transaction, blank=True)
     month = models.CharField('Month', max_length=12, choices=MONTHS, default=now.strftime('%B'), blank=False)
     year = models.IntegerField(validators=[validate_year])
-    amount_predicted = models.DecimalField(max_digits=65, decimal_places=2)
+    template = models.ForeignKey(Template, on_delete=models.CASCADE)
     account = models.ForeignKey(User, on_delete=models.CASCADE)
     def get_absolute_url(self):
         return reverse('budget-detail', args=[str(self.pk)])
     def __str__(self):
-        return self.name
-
-class Template(models.Model):
-    name = models.CharField(max_length=64)
-    budgets = models.ManyToManyField(Budget)
-    all_transactions = models.ManyToManyField(Transaction, blank=True)
-    account = models.ForeignKey(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.name
+        return f"{self.month} {self.year}"
