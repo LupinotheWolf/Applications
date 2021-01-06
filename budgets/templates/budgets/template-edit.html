@@ -1,11 +1,19 @@
 {% extends 'budgets/layout.html' %}
 {% block body %}
 <h1>Template Edit</h1>
+<!-- Just testing what you can do on HTML template! -->
+<!-- Be sure to change this page to an edit template form! -->
 <ul>
   <li>Predicted Income: {{ template.pre_income }}</li>
   <li>Predicted Expenses: {{ pre_all }}</li>
   <li>Miscellaneous Remaining Amount: {{ remaining }}</li>
-
-</ul>
+  <li>Sum of Bills: {{ pre_bills }}£</li>
+  <ul>
+    {% for bill in bills_list %}
+    <li>{{ bill.name }} ({{ bill.amount }}£), expected on {{ bill.date_expected }}</li>
+    {% empty %}
+    <li>No Bills Listed Yet!</li>
+    {% endfor %}
+  </ul>
 
 {% endblock %}

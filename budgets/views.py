@@ -8,6 +8,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
 
 from .models import *
 from .forms import *
@@ -42,12 +43,16 @@ def template(request):
 @login_required
 def template_edit(request):
     template = Template.objects.get(account=request.user)
-    pre_all = template.pre_food + template.pre_bills + template.pre_travel + template.pre_amusement
+    pre_bills = Pre_Bills.objects.filter(account=request.user).aggregate(Sum('amount'))
+    bills_list = Pre_Bills.objects.filter(account=request.user)
+    pre_all = template.pre_food + pre_bills['amount__sum'] + template.pre_travel + template.pre_amusement
     remaining = template.pre_income - pre_all
     return render(request, "budgets/template-edit.html", {
         'template': template,
         'pre_all': pre_all,
         'remaining': remaining,
+        'pre_bills': pre_bills['amount__sum'],
+        'bills_list': bills_list,
     })
 
 
