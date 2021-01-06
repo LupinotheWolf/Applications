@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Transaction)
 admin.site.register(Budget)
 admin.site.register(Template)
+admin.site.register(Pre_Bills)
