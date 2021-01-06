@@ -1,5 +1,11 @@
 {% extends 'budgets/layout.html' %}
 {% block body %}
 <h1>Template Edit</h1>
-<h2>ENTER FORM HERE</h2>
+<ul>
+  <li>Predicted Income: {{ template.pre_income }}</li>
+  <li>Predicted Expenses: {{ pre_all }}</li>
+  <li>Miscellaneous Remaining Amount: {{ remaining }}</li>
+
+</ul>
+
 {% endblock %}

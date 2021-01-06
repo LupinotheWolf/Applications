@@ -40,7 +40,15 @@ class Transaction(models.Model):
     def __str__(self):
         return self.name
 
+# class Bills(models.Model):
+#     account = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+
+
+
 class Template(models.Model):
+    account = models.ForeignKey(User, on_delete=models.CASCADE)
     pre_income = models.DecimalField(max_digits=65, decimal_places=2,)
     pre_food = models.DecimalField(max_digits=65, decimal_places=2,)
     pre_bills = models.DecimalField(max_digits=65, decimal_places=2,)

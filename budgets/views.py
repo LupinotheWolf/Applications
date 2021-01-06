@@ -34,16 +34,20 @@ def overview(request):
 
 @login_required
 def template(request):
-    template = Template.objects.get(pk=1)
+    template = Template.objects.get(account=request.user)
     return render(request, "budgets/template-view.html", {
         'template': template,
     })
 
 @login_required
 def template_edit(request):
-    template = Template.objects.get(pk=1)
+    template = Template.objects.get(account=request.user)
+    pre_all = template.pre_food + template.pre_bills + template.pre_travel + template.pre_amusement
+    remaining = template.pre_income - pre_all
     return render(request, "budgets/template-edit.html", {
         'template': template,
+        'pre_all': pre_all,
+        'remaining': remaining,
     })
 
 
