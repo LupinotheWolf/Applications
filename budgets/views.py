@@ -35,27 +35,40 @@ def overview(request):
 
 @login_required
 def template(request):
-    template = Template.objects.get(account=request.user)
-    return render(request, "budgets/template-view.html", {
-        'template': template,
-    })
+    try:
+        template = Template.objects.get(account=request.user)
+    except Template.DoesNotExist:
+        template = None
+    if template is not None:
+        pre_bills = Pre_Bills.objects.filter(account=request.user).aggregate(Sum('amount'))
+        bills_list = Pre_Bills.objects.filter(account=request.user)
+        pre_all = template.pre_food + pre_bills['amount__sum'] + template.pre_travel + template.pre_amusement
+        remaining = template.pre_income - pre_all
+        return render(request, "budgets/template-view.html", {
+            'template': template,
+            'pre_all': pre_all,
+            'remaining': remaining,
+            'pre_bills': pre_bills['amount__sum'],
+            'bills_list': bills_list,
+        })
+    else:
+        return render(request, "budgets/template-create.html", {
+            'message': 'You have no template to view! Please use the form to creat a new template!'
+        })
 
 @login_required
 def template_edit(request):
-    template = Template.objects.get(account=request.user)
-    pre_bills = Pre_Bills.objects.filter(account=request.user).aggregate(Sum('amount'))
-    bills_list = Pre_Bills.objects.filter(account=request.user)
-    pre_all = template.pre_food + pre_bills['amount__sum'] + template.pre_travel + template.pre_amusement
-    remaining = template.pre_income - pre_all
-    return render(request, "budgets/template-edit.html", {
-        'template': template,
-        'pre_all': pre_all,
-        'remaining': remaining,
-        'pre_bills': pre_bills['amount__sum'],
-        'bills_list': bills_list,
-    })
-
-
+    #be sure to add a form here!!
+    check = Template.objects.get(account=request.user)
+    if check is not None:
+        template = Template.objects.get(account=request.user)
+        return render(request, "budgets/template-edit.html", {
+            'template': template,
+        })
+    else:
+        return render(request, "budgets/template-create.html", {
+            #'form': form,
+        })
 
 #Class-Based Views
 class TransactionListView(LoginRequiredMixin, ListView):
@@ -78,6 +91,12 @@ class Transaction_Delete(LoginRequiredMixin, DeleteView):
     model = Transaction
     success_url = reverse_lazy('transactions')
 
+class TemplateCreate(LoginRequiredMixin, CreateView):
+    model = Template
+    fields = ['pre_income', 'pre_food', 'pre_travel', 'pre_amusement']
+    def form_valid(self, form):
+        form.instance.account = self.request.user
+        return super().form_valid(form)
 
 class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
