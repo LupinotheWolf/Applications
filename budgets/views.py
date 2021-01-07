@@ -133,6 +133,10 @@ class Budget_Create(LoginRequiredMixin, CreateView):
     fields = ['month', 'year', 'transactions']
     def form_valid(self, form):
         form.instance.account = self.request.user
+        
+        #Sets budget's template to the user's template
+        template = Template.objects.get(account=self.request.user)
+        form.instance.template_id = template.id
         return super().form_valid(form)
 class BudgetDetailView(LoginRequiredMixin, DetailView):
     model = Budget
