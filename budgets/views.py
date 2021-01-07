@@ -130,7 +130,7 @@ class BudgetListView(LoginRequiredMixin, ListView):
         return Budget.objects.filter(account=self.request.user)
 class Budget_Create(LoginRequiredMixin, CreateView):
     model = Budget
-    fields = ['month', 'year', 'transactions', 'amount_predicted']
+    fields = ['month', 'year', 'transactions']
     def form_valid(self, form):
         form.instance.account = self.request.user
         return super().form_valid(form)
