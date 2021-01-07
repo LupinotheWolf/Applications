@@ -70,7 +70,10 @@ def template_edit(request):
             #'form': form,
         })
 
-#Class-Based Views
+"""
+Class-Based Views
+"""
+#Transaction Views
 class TransactionListView(LoginRequiredMixin, ListView):
     model = Transaction
     def get_queryset(self):
@@ -91,6 +94,28 @@ class Transaction_Delete(LoginRequiredMixin, DeleteView):
     model = Transaction
     success_url = reverse_lazy('transactions')
 
+#Bills/Utilities Views
+class BillsListView(LoginRequiredMixin, ListView):
+    model = Pre_Bills
+    def get_queryset(self):
+        return Pre_Bills.objects.filter(account=self.request.user)
+class Bills_Create(LoginRequiredMixin, CreateView):
+    model = Pre_Bills
+    fields = ['name', 'amount', 'date_expected', 'notes']
+    def form_valid(self, form):
+        form.instance.account = self.request.user
+        return super().form_valid(form)
+class BillsDetailView(LoginRequiredMixin, DetailView):
+    model = Pre_Bills
+    fields = ['name', 'amount', 'date_expected', 'notes']
+class Bills_Update(LoginRequiredMixin, UpdateView):
+    model = Pre_Bills
+    fields = ['name', 'amount', 'date_expected', 'notes']
+class Bills_Delete(LoginRequiredMixin, DeleteView):
+    model = Pre_Bills
+    success_url = reverse_lazy('bills')
+
+#Template Views
 class TemplateCreate(LoginRequiredMixin, CreateView):
     model = Template
     fields = ['pre_income', 'pre_food', 'pre_travel', 'pre_amusement']
@@ -98,6 +123,7 @@ class TemplateCreate(LoginRequiredMixin, CreateView):
         form.instance.account = self.request.user
         return super().form_valid(form)
 
+#Budget Views
 class BudgetListView(LoginRequiredMixin, ListView):
     model = Budget
     def get_queryset(self):

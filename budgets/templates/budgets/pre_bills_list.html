@@ -1,0 +1,31 @@
+{% extends 'budgets/layout.html' %}
+
+{% block body %}
+<h1>Bills/Utilities</h1>
+{% if pre_bills_list %}
+<table class='table'>
+  <tr>
+    <th scope='col'>Bill</th>
+    <th scope='col'>Amount</th>
+    <th scope='col'>Date Expected</th>
+    <th scope='col'>Notes</th>
+  </tr>
+  {% for bill in pre_bills_list %}
+  <tr>
+    <th scope='row'><a href="{{ bill.get_absolute_url }}">{{ bill.name }}</a></th>
+    <td>{{ bill.amount }}£</td>
+    <td>{{ bill.date_expected }} of Month</td>
+    <td>{{ bill.notes }}</td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <th colspan="4"><a href="{% url 'bill-create' %}">Add a New Bill or Utility</a></th>
+  <tr>
+</table>
+<div>
+
+</div>
+  {% else %}
+    <p>There aren't any bills to display</p>
+  {% endif %}
+{% endblock %}

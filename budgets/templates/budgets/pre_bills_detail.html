@@ -1,0 +1,15 @@
+{% extends 'budgets/layout.html' %}
+{% block body %}
+<h1>Bill Detail</h1>
+<ul>
+  <li>Name: {{ pre_bills.name }}</li>
+  <li>Amount: {{ pre_bills.amount }}£</li>
+  <li>Expected: {{ pre_bills.date_expected }} of Month</li>
+  {% if pre_bills.notes %}
+  <li>Notes: {{ pre_bills.notes }}</li>
+  {% endif %}
+  <li><a href="{% url 'bill-update' pre_bills.pk %}">Update Bill</a></li>
+  <li><a href="{% url 'bill-delete' pre_bills.pk %}">Delete Bill</a></li>
+  <li><a href="{% url 'template' %}">Back to Template</a></li>
+</ul>
+{% endblock %}

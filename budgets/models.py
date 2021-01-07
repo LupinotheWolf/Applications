@@ -52,6 +52,8 @@ class Pre_Bills(models.Model):
     notes = models.TextField(blank=True, null=True)
     class Metadata:
         ordering = ['date_expected']
+    def get_absolute_url(self):
+        return reverse('bill-detail', args=[str(self.pk)])
     def __str__(self):
         return f"{self.name}({self.date_expected} of Month)"
 
