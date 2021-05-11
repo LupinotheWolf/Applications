@@ -11,7 +11,7 @@
   {% else %}
     <li>No transactions in this Budget</li>
   {% endif %}
-  <li><a href="#">Update Budget</a></li>
-  <li><a href="#">Delete Budget</a></li>
+  <li><a href="{% url 'budget-update' budget.pk %}">Update Budget</a></li>
+  <li><a href="{% url 'budget-delete' budget.pk %}">Delete Budget</a></li>
 </ul>
 {% endblock %}
