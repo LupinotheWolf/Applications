@@ -8,6 +8,11 @@
 <h2>Fancy Stuff</h2>
 <p>This is a list of all the artists we have:</p>
 <ul>
-  <li><strong>Artists:</strong> {{ all_artists }}</li>
+  {% for artist in all_artists %}
+  <li><strong>{{ artist.surname }}</strong>, {{ artist.name }}</li>
+  {% empty %}
+  <li><strong>There are no artists to display</strong></li>
+  {% endfor %}
 </ul>
+<em>You have visited this page {{ site_hits }} times!</em>
 {% endblock %}
