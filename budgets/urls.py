@@ -2,6 +2,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
 
+
 urlpatterns = [
     #path("", views.index, name="index"),
     path("overview/", views.overview, name="overview")
@@ -28,4 +29,5 @@ urlpatterns += [
 #Cars Image Test
 urlpatterns += [
     path('budgets/cars/<int:carId>/', views.Cars, name="cars"),
+    path('budgets/cars/create', views.CarsCreate.as_view(), name='carsCreate'),
 ]

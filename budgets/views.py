@@ -39,6 +39,12 @@ def Cars(request, carId):
         'message': message,
         'cars': cars,
     })
+class CarsCreate(LoginRequiredMixin, CreateView):
+    model = Car
+    fields = ['id', 'make', 'model', 'photo']
+    def form_valid(self, form):
+        form.instance.account = self.request.user
+        return super().form_valid(form)
 
 #Class-Based Views
 class TransactionListView(LoginRequiredMixin, ListView):

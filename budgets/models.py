@@ -89,7 +89,12 @@ class Template(models.Model):
         return self.name
 
 class Car(models.Model):
-    id = models.IntegerField()
+    id = models.IntegerField(primary_key=True)
     make = models.CharField(max_length=64)
     model = models.CharField(max_length=64)
-    photo = models.ImageField(upload_to='cars')
+    photo = models.ImageField(upload_to='media', null=True)
+
+    class Meta:
+        ordering = ["make"]
+    def __str__(self):
+        return self.make + self.model + ':' + str(self.photo)
