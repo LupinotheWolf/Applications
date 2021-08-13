@@ -32,6 +32,14 @@ def overview(request):
         'budgets': budgets,
     })
 
+def Cars(request, carId):
+    message = ""
+    cars = Car.objects.filter(id=carId)
+    return render(request, "budgets/car.html", {
+        'message': message,
+        'cars': cars,
+    })
+
 #Class-Based Views
 class TransactionListView(LoginRequiredMixin, ListView):
     model = Transaction

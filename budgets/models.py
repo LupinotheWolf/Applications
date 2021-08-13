@@ -89,6 +89,7 @@ class Template(models.Model):
         return self.name
 
 class Car(models.Model):
+    id = models.IntegerField()
     make = models.CharField(max_length=64)
     model = models.CharField(max_length=64)
     photo = models.ImageField(upload_to='cars')

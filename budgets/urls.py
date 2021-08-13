@@ -24,3 +24,8 @@ urlpatterns += [
     path('budgets/<int:pk/update/', views.Budget_Update.as_view(), name='budget-update'),
     path('budgets/<int:pk>/delete/', views.Budget_Delete.as_view(), name='budget-delete'),
 ]
+
+#Cars Image Test
+urlpatterns += [
+    path('budgets/cars/<int:carId>/', views.Cars, name="cars"),
+]

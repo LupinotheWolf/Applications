@@ -5,6 +5,17 @@
     <title>Car Upload</title>
   </head>
   <body>
-
+<ul>
+{% if cars %}
+{% for car in cars %}
+  <li>{{ car.id }}</li>
+  <li>{{ car.make }}</li>
+  <li>{{ car.model }}</li>
+  <li>{{ car.photo }}</li>
+{% endfor %}
+{% else %}
+<li>No Cars to Display</li>
+{% endif %}
+</ul>
   </body>
 </html>
