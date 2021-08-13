@@ -87,3 +87,8 @@ class Template(models.Model):
     account = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+
+class Car(models.Model):
+    make = models.CharField(max_length=64)
+    model = models.CharField(max_length=64)
+    photo = models.ImageField(upload_to='cars')
